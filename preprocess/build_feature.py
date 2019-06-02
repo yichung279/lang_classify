@@ -10,7 +10,7 @@ def gen_spectrogram(filename):
     spectrogram, fs, t, im = plt.specgram(samples, Fs=sample_rate, NFFT=1024, noverlap=256 , scale='dB')
 
     spectrogram , _ = np.split(spectrogram, [512], axis=0)
-    return spectrogram
+    return np.log1p(spectrogram)
 
 def get_lang(filename):
     m = re.match(r'\./wav/([a-zA-Z]+)/.*\.wav', filename)
@@ -59,8 +59,12 @@ if "__main__" == __name__:
     length = len(spectrogram_list)
     print(length)
 
-    feature = spectrogram_list[:int(0.7*length)]
-    test = spectrogram_list[int(0.7*length):]
-
-    np.save('feature.npy', feature)
-    np.save('test.npy', test)
+    for i in range(6):
+        train = spectrogram_list[int(i * length / 10):int((i+1) * length / 10)]
+        np.save('feature/train_%s.npy'%i, train)
+    for i in range(2):
+        train = spectrogram_list[int((i+6) * length / 10):int((i+7) * length / 10)]
+        np.save('feature/valid_%s.npy'%i, train)
+    for i in range(2):
+        train = spectrogram_list[int((i+8) * length / 10):int((i+9) * length / 10)]
+        np.save('feature/test_%s.npy'%i, train)
