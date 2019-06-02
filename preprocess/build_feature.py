@@ -10,7 +10,13 @@ def gen_spectrogram(filename):
     spectrogram, fs, t, im = plt.specgram(samples, Fs=sample_rate, NFFT=1024, noverlap=256 , scale='dB')
 
     spectrogram , _ = np.split(spectrogram, [512], axis=0)
-    return np.log1p(spectrogram)
+    length = spectrogram.shape[1]
+    spectrogram_resize = np.zeros((256, length, 1))
+    for i in range(256):
+        for j in range(length):
+            spectrogram_resize[i][j][0] = (spectrogram[2*i][j]+spectrogram[2*i+1][j])/2
+    
+    return np.log1p(spectrogram_resize)
 
 def get_lang(filename):
     m = re.match(r'\./wav/([a-zA-Z]+)/.*\.wav', filename)
