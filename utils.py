@@ -55,8 +55,10 @@ class DataLoader():
 
 if __name__ == '__main__':
 
-    data_loader = DataLoader(file_glob_pattern = 'feature/A.train.*.npy', batch_size = 72)
-    data = data_loader.__next__()
-    print(np.array(data[0]).shape)
-    print(np.array(data[1]).shape)
+    data_loader = DataLoader(file_glob_pattern = 'feature/valid_2.npy', batch_size = 72)
+    for i in range(1):
+        data = data_loader.__next__()
+        if (72, 256, 256, 1) != np.array(data[0]).shape and (72, 2) != np.array(data[1]).shape:
+            print(np.array(data[0]).shape)
+            print(np.array(data[1]).shape)
 
