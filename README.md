@@ -14,7 +14,6 @@ Using audio in `wav/` building dataset in `feature/`.
 ```
 $ ./preprocess/build_feature 
 ```
-Taiwanese 001.wav~529.wav => boy, 530.wav~ => girl
 
 ## Training
 Set your data size in train.py.
