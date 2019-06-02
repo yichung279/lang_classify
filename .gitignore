@@ -1,5 +1,6 @@
 *.mp3
 *.wav
+*.txt
 *.rar
 *.npy
 *.h5
