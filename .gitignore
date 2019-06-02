@@ -2,3 +2,6 @@
 *.wav
 *.rar
 *.npy
+*.h5
+*.out*
+__pycache__/*
