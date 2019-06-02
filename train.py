@@ -74,9 +74,9 @@ def build_model():
     return model
 
 if __name__ == '__main__':
-    train_size, valid_size = 4800, 3200
+    train_size, valid_size = 6963, 2321
     batch_size = 24
-    epochs = 100
+    epochs = 10
 
     train_loader = DataLoader(file_glob_pattern = 'feature/train_*.npy', batch_size = batch_size)
     valid_loader = DataLoader(file_glob_pattern = 'feature/valid_*.npy', batch_size = batch_size)
