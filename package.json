@@ -3,5 +3,24 @@
   "version": "1.0.0",
   "repository": "git@github.com:yichung279/lang_classify.git",
   "author": "yiz <ql3895619@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "app": "parcel app/index.pug",
+    "build": "parcel build --public-url ./ app/index.pug",
+    "ser": "nodemon ser.js --watch ser.js",
+    "start": "concurrently --kill-others \"yarn run ser\" \"yarn run app\""
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.0",
+    "parcel": "^1.12.3",
+    "pug": "^2.0.3",
+    "sass": "^1.20.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "semantic-ui-offline": "^2.4.1-1",
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.3"
+  }
 }

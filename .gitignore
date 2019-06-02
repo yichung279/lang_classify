@@ -5,6 +5,7 @@
 *.npy
 *.h5
 *.out*
-dist/*
-.cache/*
 __pycache__/*
+.cache/*
+dist/*
+node_modules/*
