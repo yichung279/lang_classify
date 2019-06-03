@@ -5,50 +5,49 @@
     .ui.loader.massive(v-if="'analizing'==status")
     .circular.ui.icon.button(@click="start_record")
       i.microphone.icon.huge
+  #uploader
 
 
 </template>
 
 <script>
 import 'semantic-ui-offline/semantic.min.css'
+import Recorder from 'recorder-js'
 const axios = require('axios')
 export default {
 
   data() { return {
     status: '',
-    countdown: 10
+    countdown: 10,
   }},
 
   methods: {
     start_record () {
-      this.status = 'timing'
-      setInterval(() => this.countdown--, 1000)
-      setTimeout(() => this.stop_record(), 10000)
-
+      self = this
       navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-      .then(this.handleSuccess)
+      .then((stream)=>{
+        self.handleSuccess(stream)
+        self.status = 'timing'
+        setInterval(() => self.countdown--, 1000)
+        setTimeout(() => self.stop_record(), 10000)
+      })
     },
     handleSuccess (stream) {
-      const options = {mimeType: 'audio/webm'}
-      const recordedChunks = []
-      const mediaRecorder = new MediaRecorder(stream, options)
-
-      mediaRecorder.addEventListener('dataavailable', function(e) {
-	if (e.data.size > 0) {
-	  recordedChunks.push(e.data)
-	}
-      })
-
-      mediaRecorder.addEventListener('stop', function() {
-        console.log("analizing...")
-        // axios.post(`/upload`, recordedChunks)
-	// downloadLink.href = URL.createObjectURL(new Blob(recordedChunks))
-	// downloadLink.download = 'acetest.wav'
-      })
-
-      mediaRecorder.start()
-      setTimeout(() => mediaRecorder.stop(), 10000)
+      let context =  new window.AudioContext()
+      let recorder = new Recorder(context, {onAnalysed: data=>console.log(data)})
+      recorder.init(stream)
+      recorder.start()
+      setTimeout(()=>{
+        recorder.stop()
+        .then((blob)=>{
+          console.log(blob)
+          let form = new FormData(document.getElementById("uploader"))
+          form.append("data", blob.blob)
+          axios.post(`/upload`, form)
+        })
+      }, 10000)
     },
+
     stop_record () {
       this.status = 'analizing'
     }

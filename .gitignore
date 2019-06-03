@@ -9,3 +9,5 @@ __pycache__/*
 .cache/*
 dist/*
 node_modules/*
+config.json
+yarn-error.log

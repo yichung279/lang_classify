@@ -7,7 +7,7 @@
   "scripts": {
     "app": "parcel app/index.pug",
     "build": "parcel build --public-url ./ app/index.pug",
-    "ser": "nodemon ser.js --watch ser.js",
+    "ser": "node ser.js --watch ser.js",
     "start": "concurrently --kill-others \"yarn run ser\" \"yarn run app\""
   },
   "devDependencies": {
@@ -19,6 +19,10 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.4",
+    "fs": "^0.0.1-security",
+    "recorder-js": "^1.0.7",
     "semantic-ui-offline": "^2.4.1-1",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.3"
