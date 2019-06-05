@@ -25,6 +25,5 @@ if __name__ == '__main__':
 
     x_true, y_true = load_data()
     model = load_model(model_path)
-    y_pred = np.argmax(model.predict(x_te), axis=1)
-    print(classification_report(y_te, y_pred)
-
+    y_pred = np.argmax(model.predict(x_true), axis=1)
+    print(classification_report(y_true, y_pred))

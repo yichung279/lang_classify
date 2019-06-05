@@ -13,7 +13,7 @@ for hyperlink in hyperlink_list:
 
 for i, url in enumerate(url_list):
     num = str(i+530)
-    filename = './mp3/Taiwanese/'+num+'.mp3'
+    filename = './download/Taiwanese/'+num+'.mp3'
     print(url, filename)
     try:
         request.urlretrieve(url, filename)

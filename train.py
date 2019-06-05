@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import numpy as np
-# from keras.models import Sequential
 from keras.layers import Input, Dense, Conv2D, MaxPooling2D, GlobalAveragePooling2D, Flatten, Dropout
 from keras.layers.merge import concatenate
 from keras.models import Model
@@ -74,9 +73,9 @@ def build_model():
     return model
 
 if __name__ == '__main__':
-    train_size, valid_size = 6963, 2321
+    train_size, valid_size = 20411, 6804
     batch_size = 24
-    epochs = 10
+    epochs = 100
 
     train_loader = DataLoader(file_glob_pattern = 'feature/train_*.npy', batch_size = batch_size)
     valid_loader = DataLoader(file_glob_pattern = 'feature/valid_*.npy', batch_size = batch_size)

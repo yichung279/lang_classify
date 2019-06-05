@@ -1,4 +1,4 @@
-for i in mp3/Chinese/*.wav;
+for i in download/Chinesee/*.wav;
    do name=`echo $i | cut -d'/' -f3`;
-   ffmpeg -i "$i" "wav/Chinese/${name}";
+   ffmpeg -i "$i" "download/Chinese/${name}";
 done

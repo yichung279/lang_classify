@@ -4,10 +4,11 @@
 *.rar
 *.npy
 *.h5
+*.zip
 *.out*
 __pycache__/*
-.cache/*
-dist/*
-node_modules/*
-config.json
-yarn-error.log
+website/.cache/*
+website/dist/*
+website/node_modules/*
+website/config.json
+website/yarn-error.log
