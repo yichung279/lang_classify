@@ -1,5 +1,5 @@
 const config = require('./config')
-const { execSync } = require('child_process')
+const { execFileSync } = require('child_process')
 const express = require('express')
 const fs =require('fs')
 const https = require('https')
@@ -29,10 +29,11 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.post('/upload', (req, res) => {
-  console.log(req.files)
-  req.files.data.mv('test.wav')
-  // fs.writeFile('test.wav', req.body)
-  res.send()
+app.post('/upload', async (req, res) => {
+  await req.files.data.mv('test.wav')
+  const result = execFileSync("./predict.py").toString()
+
+  // 0=>Tauwanese, 1=>Chinese
+  res.send(result[result.length-2])
 })
 // vi:et:sw=2:ts=2
